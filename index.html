@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brady - Travel & People Photography</title>
     
+    <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <style>
+        /* Define Brand Colors for Easy Reference */
+        :root {
+            --color-charcoal: #1A1A1A;      /* Deep Charcoal (Primary Text/Dark BG) */
+            --color-ochre: #B85C38;         /* Burnt Ochre (Accent/CTA) */
+            --color-sage: #6B7F73;          /* Muted Sage (Secondary Accent) */
+            --color-parchment: #F5F5F5;     /* Off-White/Parchment (Light BG/Text on Dark) */
+        }
+
         /* Reset and Base Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'nitti-grotesk-condensed', sans-serif; 
             font-weight: 300;
             line-height: 1.6; 
-            color: #333; 
+            color: var(--color-charcoal); /* APPLIED: Deep Charcoal */ 
             overflow-x: hidden; 
         }
         
@@ -22,7 +33,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: #000;
+            background: var(--color-charcoal); /* APPLIED: Deep Charcoal */
             padding: 10px 30px;
             display: flex;
             justify-content: space-between;
@@ -33,10 +44,10 @@
         }
         .nav-logo a img {
             height: 40px; 
-            filter: ;
+            /* You might need to change the logo to a light version if it was dark */
         }
         .nav-links a {
-            color: #fff;
+            color: var(--color-parchment); /* APPLIED: Off-White/Parchment for contrast */
             text-decoration: none;
             margin-left: 25px;
             font-weight: 500; 
@@ -49,7 +60,7 @@
             /* --- END SETUP --- */
         }
         .nav-links a:hover {
-            color: #ccc; /* Subtle color change on text hover */
+            color: var(--color-ochre); /* APPLIED: Burnt Ochre */
         }
 
         /* 1. Create the invisible underline */
@@ -61,7 +72,7 @@
             transform: translateX(-50%);
             width: 0; 
             height: 2px;
-            background-color: #fff; 
+            background-color: var(--color-ochre); /* APPLIED: Burnt Ochre */ 
             transition: width 0.3s ease-out; 
         }
 
@@ -78,7 +89,7 @@
             justify-content: center; 
             align-items: center; 
             text-align: center; 
-            background: #f9f9f9; 
+            background: var(--color-parchment); /* APPLIED: Off-White/Parchment */
         }
         section:not(#header) { 
             min-height: 100vh;
@@ -104,19 +115,23 @@
         .cta { 
             display: inline-block; 
             padding: 15px 30px; 
-            background: #000; 
+            background: var(--color-ochre); /* APPLIED: Burnt Ochre */
             color: #fff; 
             text-decoration: none; 
             border-radius: 5px; 
             font-weight: 700; 
             transition: background 0.3s; 
             font-family: 'nitti-grotesk-condensed', sans-serif;
+            line-height: 1; /* Fixes button vertical alignment issue with condensed font */
         }
-        .cta:hover { background: #333; }
+        .cta:hover { 
+            background: #9A492C; /* Darker Burnt Ochre */
+        }
         
         /* Header */
         #header {
-            background-image: linear-gradient(to right, rgba(0, 0, 0.5,0.9), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/dopjo7zej/image/upload/v1764885290/DSC09258_rwuxvr.jpg');
+            background-image: linear-gradient(to right, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.4)), url('https://res.cloudinary.com/dopjo7zej/image/upload/v1764885290/DSC09258_rwuxvr.jpg');
+            /* APPLIED: Dark overlay updated to Deep Charcoal transparency */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -137,7 +152,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Gallery */
+        /* Gallery - No color changes needed here, as photos are the focus */
         .gallery { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -197,14 +212,85 @@
         .lightbox img { max-width: 90%; max-height: 90%; }
         .close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; }
         
+        /* Contact Form Styles (UPDATED) */
+        #contact-form-container {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 30px;
+            padding: 30px; /* Increased padding */
+            background: #fff; /* White container */
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+        }
+        #contact-form-container input[type="text"],
+        #contact-form-container input[type="email"],
+        #contact-form-container textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--color-sage); /* APPLIED: Muted Sage for borders */
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: inherit;
+            color: var(--color-charcoal);
+        }
+        #contact-form-container textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        #contact-form-container button {
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            /* Replaced with .cta styles below, but needed this block for general button definition */
+        }
+        
+        /* Apply CTA styles to the Send Message button */
+        #contact-form-container button.cta {
+            padding: 15px 30px; 
+            background: var(--color-ochre); /* APPLIED: Burnt Ochre */
+            color: #fff; 
+            font-weight: 700; 
+            transition: background 0.3s; 
+            font-family: 'nitti-grotesk-condensed', sans-serif;
+        }
+        #contact-form-container button.cta:hover { 
+            background: #9A492C; /* Darker Burnt Ochre */
+        }
+
         /* Footer */
         #footer { 
-            background: #000; 
+            background: var(--color-charcoal); /* APPLIED: Deep Charcoal */
             color: #fff; 
             padding: 40px 20px; 
             text-align: center; 
         }
         
+        /* Social Media Icons (UPDATED) */
+        .social-links {
+            margin: 20px 0;
+        }
+        .social-links a {
+            color: var(--color-parchment); /* APPLIED: Off-White/Parchment */
+            font-size: 1.8em; /* Slightly larger */
+            margin: 0 18px;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--color-ochre); /* APPLIED: Burnt Ochre on hover */
+        }
+
+        /* Footer Link Overrides */
+        #footer p a {
+             color: var(--color-sage) !important; /* APPLIED: Muted Sage */
+             text-decoration: none;
+             transition: color 0.3s;
+        }
+        #footer p a:hover {
+            color: var(--color-ochre) !important; /* APPLIED: Burnt Ochre on hover */
+        }
+
+
         /* Responsive */
         @media (max-width: 768px) { 
             #navbar { padding: 10px 15px; }
@@ -221,7 +307,7 @@
             bottom: 40px; 
             left: 50%; 
             transform: translateX(-50%); 
-            color: #fff;
+            color: var(--color-parchment); /* APPLIED: Off-White/Parchment */
             font-size: 1.2em;
             padding: 10px 20px;
             background-color: rgba(0, 0, 0, 0.3);
@@ -255,8 +341,7 @@
             <a href="#travel">Travel</a>
             <a href="#people">People</a>
             <a href="#about">About</a>
-            <a href="mailto:brady@example.com">Contact</a>
-        </nav>
+            <a href="#contact">Contact</a> </nav>
     </header>
     
     <section id="header">
@@ -304,10 +389,31 @@
     <section id="about">
         <h2>About Brady</h2>
         <p>I'm a passionate photographer chasing light across continents. From bustling markets to serene mountain trails, my work blends travel's thrill with the depth of human stories. Join me on this visual journey.</p>
-        <a href="mailto:brady@example.com" class="cta">Get in Touch</a>
+        <a href="#contact" class="cta">Get in Touch</a>
     </section>
 
+    <section id="contact">
+        <h2>Work With Me</h2>
+        <h3>Get in Touch for Commissions or Prints</h3>
+        <p>Ready to collaborate or want to purchase a fine art print? Send me a message, and I'll get back to you promptly.</p>
+        
+        <div id="contact-form-container">
+            <form action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST"> 
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message or Project Details" required></textarea>
+                <button type="submit" class="cta">Send Message</button>
+            </form>
+        </div>
+    </section>
     <footer id="footer">
+        <div class="social-links">
+            <a href="https://instagram.com/bradyphoto" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/bradyphoto" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com/in/bradyphoto" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:brady@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        
         <p>&copy; 2025 Brady. All rights reserved. | <a href="#header" style="color: #ccc;">Back to Top</a></p>
     </footer>
 
@@ -336,7 +442,9 @@
                 const navbarHeight = 60; // Must match the fixed #navbar height
                 
                 if (targetElement) {
-                    const targetPosition = targetElement.offsetTop - navbarHeight;
+                    // Check if the target is the header (where we don't need offset)
+                    const offset = (targetId === '#header') ? 0 : navbarHeight;
+                    const targetPosition = targetElement.offsetTop - offset;
                     
                     window.scrollTo({
                         top: targetPosition,
@@ -350,12 +458,14 @@
         let scrolled = false;
         window.addEventListener('scroll', () => {
             const scrollPrompt = document.querySelector('.scroll-prompt');
-            if (window.scrollY > 50 && !scrolled) { 
-                scrollPrompt.style.opacity = '0';
-                scrolled = true;
-            } else if (window.scrollY < 50 && scrolled) {
-                scrollPrompt.style.opacity = '1';
-                scrolled = false;
+            if (scrollPrompt) { // Ensure element exists before manipulating it
+                if (window.scrollY > 50 && !scrolled) { 
+                    scrollPrompt.style.opacity = '0';
+                    scrolled = true;
+                } else if (window.scrollY < 50 && scrolled) {
+                    scrollPrompt.style.opacity = '1';
+                    scrolled = false;
+                }
             }
         });
     </script>
