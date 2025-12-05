@@ -11,9 +11,8 @@
         /* Reset and Base Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            /* --- UPDATED FONT FAMILY AND WEIGHT --- */
             font-family: 'nitti-grotesk-condensed', sans-serif; 
-            font-weight: 300; /* Light weight for body text */
+            font-weight: 300;
             line-height: 1.6; 
             color: #333; 
             overflow-x: hidden; 
@@ -42,14 +41,37 @@
             color: #fff;
             text-decoration: none;
             margin-left: 25px;
-            /* Nav links use a slightly heavier weight for prominence */
             font-weight: 500; 
             font-family: 'nitti-grotesk-condensed', sans-serif;
             transition: color 0.3s;
+
+            /* --- UNDERLINE SWIPE SETUP --- */
+            position: relative; 
+            padding-bottom: 5px; 
+            /* --- END SETUP --- */
         }
         .nav-links a:hover {
-            color: #ccc;
+            color: #ccc; /* Subtle color change on text hover */
         }
+
+        /* 1. Create the invisible underline */
+        #navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 0; 
+            height: 2px;
+            background-color: #fff; 
+            transition: width 0.3s ease-out; 
+        }
+
+        /* 2. Expand the underline on hover */
+        #navbar .nav-links a:hover::after {
+            width: 100%; 
+        }
+        /* --- END NAVIGATION HOVER --- */
 
         section { 
             padding: 80px 20px; 
@@ -64,17 +86,16 @@
             min-height: 100vh;
         }
         
-        /* --- HEADERS (Using a bold weight for impact) --- */
         h1, h2 { 
             font-family: 'nitti-grotesk-condensed', sans-serif;
             font-size: 3em; 
-            font-weight: 700; /* Bold weight for main headers */
+            font-weight: 700;
             margin-bottom: 20px; 
         }
         h3 { 
             font-family: 'nitti-grotesk-condensed', sans-serif;
             font-size: 1.5em; 
-            font-weight: 500; /* Medium weight for subheaders */
+            font-weight: 500; 
             margin-bottom: 10px; 
         }
         p { 
@@ -89,7 +110,7 @@
             color: #fff; 
             text-decoration: none; 
             border-radius: 5px; 
-            font-weight: 700; /* Bold weight for CTAs */
+            font-weight: 700; 
             transition: background 0.3s; 
             font-family: 'nitti-grotesk-condensed', sans-serif;
         }
@@ -127,7 +148,7 @@
             margin: 40px auto; 
         }
         
-        /* --- GRADIENT HOVER EFFECT CSS --- */
+        /* --- GRADIENT HOVER EFFECT CSS (Image Gallery) --- */
         .gallery-item {
             position: relative;
             overflow: hidden; 
@@ -299,7 +320,6 @@
 
     <script>
         // Simple Lightbox
-        // Updated to use the parent container's onclick event
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').style.display = 'flex';
@@ -308,13 +328,23 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // Smooth Scroll for CTAs (if linking to sections)
+        // Smooth Scroll for CTAs and Nav Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                // We add a slight offset to prevent the fixed navbar from covering the content
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const navbarHeight = 60; // Must match the fixed #navbar height
+                
+                if (targetElement) {
+                    const targetPosition = targetElement.offsetTop - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
@@ -322,10 +352,10 @@
         let scrolled = false;
         window.addEventListener('scroll', () => {
             const scrollPrompt = document.querySelector('.scroll-prompt');
-            if (window.scrollY > 50 && !scrolled) { // Fades out when the user scrolls down a little
+            if (window.scrollY > 50 && !scrolled) { 
                 scrollPrompt.style.opacity = '0';
                 scrolled = true;
-            } else if (window.scrollY < 50 && scrolled) { // Fades back in if scrolled back to top
+            } else if (window.scrollY < 50 && scrolled) {
                 scrollPrompt.style.opacity = '1';
                 scrolled = false;
             }
