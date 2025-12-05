@@ -17,10 +17,10 @@
     <style>
         /* Define Brand Colors for Easy Reference */
         :root {
-            --color-charcoal: #1A1A1A;      /* Deep Charcoal (Primary Text/Dark BG) */
-            --color-ochre: #B85C38;         /* Burnt Ochre (Accent/CTA) */
-            --color-sage: #6B7F73;          /* Muted Sage (Secondary Accent) */
-            --color-parchment: #F5F5F5;     /* Off-White/Parchment (Light BG/Text on Dark) */
+            --color-charcoal: #1A1A1A;      
+            --color-ochre: #B85C38;         
+            --color-sage: #6B7F73;          
+            --color-parchment: #F5F5F5;     
         }
 
         /* Reset and Base Styles */
@@ -29,65 +29,66 @@
             font-family: 'nitti-grotesk-condensed', sans-serif; 
             font-weight: 300;
             line-height: 1.6; 
-            color: var(--color-charcoal); /* APPLIED: Deep Charcoal */ 
+            color: var(--color-charcoal); 
             overflow-x: hidden; 
         }
         
         /* --- NAVIGATION BAR --- */
-#navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: var(--color-charcoal);
-    padding: 20px 30px;
-    
-    /* === MODIFICATION 1: Center everything in the navbar container === */
-    display: flex;
-    flex-direction: column; /* Stack the logo and links vertically */
-    justify-content: center;
-    align-items: center;
-    /* =============================================================== */
-    
-    z-index: 1000;
-    height: auto; /* Changed from 60px to auto to accommodate stacking */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--color-charcoal);
+            padding: 10px 30px; 
+            
+            display: flex;
+            flex-direction: row; 
+            justify-content: space-between; 
+            align-items: center;
+            
+            z-index: 1000;
+            height: 85px; /* MODIFIED: Set fixed height to accommodate 65px logo + padding */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
-.nav-logo {
-    /* Set the logo container to take full width and center its content */
-    width: 100%;
-    text-align: center;
-    padding-bottom: 5px; /* Add a little space between logo and links */
-}
+        /* NEW: Left Spacer Element */
+        .nav-spacer {
+            flex: 1; 
+        }
 
-.nav-logo a img {
-    height: 90px; /* Reduced height from 60px to 40px for better vertical fit */
-    filter: ; /* You might need to change the logo to a light version if it was dark */
-}
+        .nav-logo {
+            width: auto;
+            text-align: center; 
+            padding-bottom: 0; 
+        }
 
-.nav-links {
-    /* === MODIFICATION 2: Center the links horizontally === */
-    text-align: center;
-    padding-top: 5px; /* Add space above the links */
-}
+        .nav-logo a img {
+            height: 65px; /* MODIFIED: Set logo height to 65px */
+            filter: ;
+        }
 
-.nav-links a {
-    color: var(--color-parchment);
-    text-decoration: none;
-    /* Reduced margin to make stacked links look better */
-    margin: 0 12px; 
-    font-weight: 500;
-    font-family: 'nitti-grotesk-condensed', sans-serif;
-    transition: color 0.3s;
+        .nav-links {
+            flex: 1; 
+            text-align: right; 
+            padding-top: 0px; 
+        }
 
-    /* --- UNDERLINE SWIPE SETUP --- */
-    position: relative;
-    padding-bottom: 5px;
-    /* --- END SETUP --- */
-}
+        .nav-links a {
+            color: var(--color-parchment);
+            text-decoration: none;
+            margin-left: 25px; 
+            font-weight: 200;
+            font-family: 'nitti-grotesk-condensed', sans-serif;
+            transition: color 0.3s;
 
-/* ... rest of the CSS for .nav-links a::after remains the same ... */
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .nav-links a:hover {
+            color: var(--color-ochre);
+        }
+
         /* 1. Create the invisible underline */
         #navbar .nav-links a::after {
             content: '';
@@ -97,7 +98,7 @@
             transform: translateX(-50%);
             width: 0; 
             height: 2px;
-            background-color: var(--color-ochre); /* APPLIED: Burnt Ochre */ 
+            background-color: var(--color-ochre); 
             transition: width 0.3s ease-out; 
         }
 
@@ -114,7 +115,7 @@
             justify-content: center; 
             align-items: center; 
             text-align: center; 
-            background: var(--color-parchment); /* APPLIED: Off-White/Parchment */
+            background: var(--color-parchment);
         }
         section:not(#header) { 
             min-height: 100vh;
@@ -140,23 +141,22 @@
         .cta { 
             display: inline-block; 
             padding: 15px 30px; 
-            background: var(--color-ochre); /* APPLIED: Burnt Ochre */
+            background: var(--color-ochre); 
             color: #fff; 
             text-decoration: none; 
             border-radius: 5px; 
             font-weight: 700; 
             transition: background 0.3s; 
             font-family: 'nitti-grotesk-condensed', sans-serif;
-            line-height: 1; /* Fixes button vertical alignment issue with condensed font */
+            line-height: 1; 
         }
         .cta:hover { 
-            background: #9A492C; /* Darker Burnt Ochre */
+            background: #9A492C; 
         }
         
         /* Header */
         #header {
             background-image: linear-gradient(to right, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.4)), url('https://res.cloudinary.com/dopjo7zej/image/upload/v1764885290/DSC09258_rwuxvr.jpg');
-            /* APPLIED: Dark overlay updated to Deep Charcoal transparency */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -167,7 +167,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 10px;
             position: relative; 
             padding-top: 100px;
         }
@@ -237,15 +237,15 @@
         .lightbox img { max-width: 90%; max-height: 90%; }
         .close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; }
         
-        /* Contact Form Styles (UPDATED) */
+        /* Contact Form Styles */
         #contact-form-container {
             width: 100%;
             max-width: 500px;
             margin-top: 30px;
-            padding: 30px; /* Increased padding */
-            background: #fff; /* White container */
+            padding: 30px; 
+            background: #fff; 
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); 
         }
         #contact-form-container input[type="text"],
         #contact-form-container input[type="email"],
@@ -253,7 +253,7 @@
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid var(--color-sage); /* APPLIED: Muted Sage for borders */
+            border: 1px solid var(--color-sage); 
             border-radius: 5px;
             font-size: 1em;
             font-family: inherit;
@@ -267,63 +267,125 @@
             width: 100%;
             cursor: pointer;
             border: none;
-            /* Replaced with .cta styles below, but needed this block for general button definition */
         }
         
         /* Apply CTA styles to the Send Message button */
         #contact-form-container button.cta {
             padding: 15px 30px; 
-            background: var(--color-ochre); /* APPLIED: Burnt Ochre */
+            background: var(--color-ochre); 
             color: #fff; 
             font-weight: 700; 
             transition: background 0.3s; 
             font-family: 'nitti-grotesk-condensed', sans-serif;
         }
         #contact-form-container button.cta:hover { 
-            background: #9A492C; /* Darker Burnt Ochre */
+            background: #9A492C;
         }
 
         /* Footer */
         #footer { 
-            background: var(--color-charcoal); /* APPLIED: Deep Charcoal */
+            background: var(--color-charcoal); 
             color: #fff; 
             padding: 40px 20px; 
             text-align: center; 
         }
         
-        /* Social Media Icons (UPDATED) */
+        /* Social Media Icons */
         .social-links {
             margin: 20px 0;
         }
         .social-links a {
-            color: var(--color-parchment); /* APPLIED: Off-White/Parchment */
-            font-size: 1.8em; /* Slightly larger */
+            color: var(--color-parchment); 
+            font-size: 1.8em; 
             margin: 0 18px;
             transition: color 0.3s;
         }
         .social-links a:hover {
-            color: var(--color-ochre); /* APPLIED: Burnt Ochre on hover */
+            color: var(--color-ochre); 
         }
 
         /* Footer Link Overrides */
         #footer p a {
-             color: var(--color-sage) !important; /* APPLIED: Muted Sage */
+             color: var(--color-sage) !important;
              text-decoration: none;
              transition: color 0.3s;
         }
         #footer p a:hover {
-            color: var(--color-ochre) !important; /* APPLIED: Burnt Ochre on hover */
+            color: var(--color-ochre) !important;
         }
+
+        /* --- ABOUT SECTION STYLES --- */
+        .about-content {
+            display: flex; 
+            align-items: center; 
+            max-width: 900px; 
+            width: 100%;
+            margin: 30px auto;
+            text-align: left; 
+            gap: 40px; 
+        }
+
+        .about-image {
+            flex: 1; 
+            min-width: 300px; 
+            border-radius: 10px;
+            overflow: hidden; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .about-text {
+            flex: 2; 
+            padding: 20px 0;
+        }
+        /* --- END ABOUT SECTION STYLES --- */
 
 
         /* Responsive */
         @media (max-width: 768px) { 
-            #navbar { padding: 10px 15px; }
-            .nav-logo a img { height: 30px; }
-            .nav-links a { margin-left: 15px; font-size: 0.9em; }
+            #navbar { 
+                padding: 10px 15px; 
+                flex-direction: column;
+                height: auto; /* Allow height to adjust for stacked elements */
+            }
+            .nav-spacer {
+                display: none; 
+            }
+            .nav-logo {
+                width: 100%;
+                text-align: center;
+                padding-bottom: 5px;
+            }
+            .nav-logo a img { 
+                height: 45px; /* MODIFIED: Adjusted mobile logo height */
+            }
+            .nav-links {
+                width: 100%;
+                text-align: center;
+                padding-bottom: 5px;
+            }
+            .nav-links a { 
+                margin: 0 8px; 
+                font-size: 0.9em; 
+            }
             #header h1 { font-size: 3.5em; margin-top: 0; }
             h1, h2 { font-size: 2em; } 
             .gallery { grid-template-columns: 1fr; }
+
+            .about-content {
+                flex-direction: column; 
+                gap: 20px;
+                text-align: center; 
+            }
+            .about-text {
+                padding: 0;
+            }
         }
         
         /* Scroll Prompt */
@@ -332,7 +394,7 @@
             bottom: 40px; 
             left: 50%; 
             transform: translateX(-50%); 
-            color: var(--color-parchment); /* APPLIED: Off-White/Parchment */
+            color: var(--color-parchment); 
             font-size: 1.2em;
             padding: 10px 20px;
             background-color: rgba(0, 0, 0, 0.3);
@@ -352,64 +414,25 @@
                 transform: translateY(-5px) translateX(-50%);
             }
         }
-        /* --- ABOUT SECTION STYLES (NEW) --- */
-.about-content {
-    display: flex; /* Enable Flexbox layout */
-    align-items: center; /* Vertically align items */
-    max-width: 900px; /* Control max width of the container */
-    width: 100%;
-    margin: 30px auto;
-    text-align: left; /* Make text readable within its column */
-    gap: 40px; /* Space between the image and the text */
-}
-
-.about-image {
-    flex: 1; /* Allow the image container to grow */
-    min-width: 300px; /* Minimum size for the image area */
-    border-radius: 10px;
-    overflow: hidden; /* Hide anything outside the rounded corners */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-.about-text {
-    flex: 2; /* Allow the text container to be larger than the image */
-    padding: 20px 0;
-}
-
-/* Responsive adjustment for small screens */
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column; /* Stack image above text on mobile */
-        gap: 20px;
-        text-align: center; /* Center align text on mobile */
-    }
-    .about-text {
-        padding: 0;
-    }
-}
-/* --- END ABOUT SECTION STYLES --- */
     </style>
 </head>
 <body>
     
     <header id="navbar">
+        <div class="nav-spacer"></div>
+        
         <div class="nav-logo">
             <a href="#header">
-                <img src="https://res.cloudinary.com/dopjo7zej/image/upload/v1764965985/simpleiutah_paxnwg.png" alt="Brady Photography Logo">
+                <img src="https://res.cloudinary.com/dopjo7zej/image/upload/v1764965985/simpleiutah_paxnwg.png" alt="Brady Photography Logo" style="height: 65px;">
             </a>
         </div>
+        
         <nav class="nav-links">
             <a href="#travel">Travel</a>
             <a href="#people">People</a>
             <a href="#about">About</a>
-            <a href="#contact">Contact</a> </nav>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
     
     <section id="header">
@@ -517,7 +540,7 @@
                 // We add a slight offset to prevent the fixed navbar from covering the content
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                const navbarHeight = 60; // Must match the fixed #navbar height
+                const navbarHeight = 85; // MODIFIED: Must match the new fixed #navbar height (85px)
                 
                 if (targetElement) {
                     // Check if the target is the header (where we don't need offset)
