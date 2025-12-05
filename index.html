@@ -3,321 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brady - Photography Portfolio</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Brady - Travel & People Photography</title>
+    <style>
+        /* Reset and Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Arial', sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            overflow-x: hidden; 
+        }
+        section { 
+            min-height: 100vh; 
+            padding: 80px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            background: #f9f9f9; 
+        }
+        section:nth-child(even) { background: #fff; }
+        h1, h2 { font-size: 3em; font-weight: bold; margin-bottom: 20px; }
+        h3 { font-size: 1.5em; margin-bottom: 10px; }
+        p { max-width: 600px; margin-bottom: 30px; font-size: 1.1em; }
+        .cta { 
+            display: inline-block; 
+            padding: 15px 30px; 
+            background: #000; 
+            color: #fff; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            transition: background 0.3s; 
+        }
+        .cta:hover { background: #333; }
+        
+        /* Header */
+        #header { background: #000; color: #fff; }
+        #header h1 { font-size: 4em; }
+        
+        /* Gallery */
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+            max-width: 1200px; 
+            margin: 40px auto; 
+        }
+        .gallery img { 
+            width: 100%; 
+            height: 300px; 
+            object-fit: cover; 
+            cursor: pointer; 
+            border-radius: 10px; 
+            transition: transform 0.3s; 
+        }
+        .gallery img:hover { transform: scale(1.05); }
+        
+        /* Lightbox */
+        .lightbox { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.9); 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000; 
+        }
+        .lightbox img { max-width: 90%; max-height: 90%; }
+        .close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; }
+        
+        /* Footer */
+        #footer { 
+            background: #000; 
+            color: #fff; 
+            padding: 40px 20px; 
+            text-align: center; 
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) { 
+            h1, h2 { font-size: 2em; } 
+            .gallery { grid-template-columns: 1fr; }
+        }
+        
+        /* Scroll Prompt */
+        .scroll-prompt { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            color: #666; 
+            font-size: 1em; 
+        }
+    </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="text/babel">
-        const { useState } = React;
-        const { Camera, Menu, X, Instagram, Mail, ChevronRight } = lucide;
+    <!-- Header -->
+    <section id="header">
+        <h1>Brady</h1>
+        <p>World Explorer Through the Lens</p>
+        <p class="scroll-prompt">Scroll to Discover</p>
+    </section>
 
-        const PhotographyPortfolio = () => {
-          const [currentPage, setCurrentPage] = useState('home');
-          const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-          const [selectedCategory, setSelectedCategory] = useState(null);
+    <!-- Travel Section -->
+    <section id="travel">
+        <h2>Moments in Motion</h2>
+        <h3>Travel Photography</h3>
+        <p>Capturing the untamed beauty of distant lands, where every horizon tells a story of adventure and discovery.</p>
+        <a href="#gallery-travel" class="cta">Explore the World</a>
+        <div class="gallery" id="gallery-travel">
+            <!-- Add your travel images here -->
+            <img src="images/travel-1.jpg" alt="Travel Photo 1" onclick="openLightbox(this.src)">
+            <img src="images/travel-2.jpg" alt="Travel Photo 2" onclick="openLightbox(this.src)">
+            <img src="images/travel-3.jpg" alt="Travel Photo 3" onclick="openLightbox(this.src)">
+        </div>
+    </section>
 
-          // Sample photography data - replace with your actual images
-          const photography = {
-            adventure: [
-              { id: 1, title: 'Mountain Peak', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800' },
-              { id: 2, title: 'Rock Climbing', url: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800' },
-              { id: 3, title: 'Trail Running', url: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800' },
-              { id: 4, title: 'Alpine View', url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800' },
-              { id: 5, title: 'Summit', url: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800' },
-              { id: 6, title: 'Wilderness', url: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=800' }
-            ],
-            landscape: [
-              { id: 7, title: 'Golden Hour', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800' },
-              { id: 8, title: 'Mountain Range', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800' },
-              { id: 9, title: 'Desert Vista', url: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800' },
-              { id: 10, title: 'Forest Path', url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800' },
-              { id: 11, title: 'Coastal View', url: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800' },
-              { id: 12, title: 'Valley', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800' }
-            ],
-            travel: [
-              { id: 13, title: 'City Streets', url: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800' },
-              { id: 14, title: 'Local Culture', url: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800' },
-              { id: 15, title: 'Urban Explorer', url: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800' },
-              { id: 16, title: 'Remote Places', url: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800' },
-              { id: 17, title: 'Architecture', url: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800' },
-              { id: 18, title: 'Journey', url: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=800' }
-            ]
-          };
+    <!-- People Section -->
+    <section id="people">
+        <h2>Stories in Faces</h2>
+        <h3>People Photography</h3>
+        <p>Portraits that reveal the soul—raw emotions, shared glances, and the human connections that bridge cultures.</p>
+        <a href="#gallery-people" class="cta">View Portraits</a>
+        <div class="gallery" id="gallery-people">
+            <!-- Add your people images here -->
+            <img src="images/people-1.jpg" alt="People Photo 1" onclick="openLightbox(this.src)">
+            <img src="images/people-2.jpg" alt="People Photo 2" onclick="openLightbox(this.src)">
+            <img src="images/people-3.jpg" alt="People Photo 3" onclick="openLightbox(this.src)">
+        </div>
+    </section>
 
-          const Navigation = () => (
-            <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                  <button 
-                    onClick={() => setCurrentPage('home')}
-                    className="text-2xl font-light tracking-wider hover:text-gray-600 transition-colors"
-                  >
-                    BRADY
-                  </button>
-                  
-                  {/* Desktop Menu */}
-                  <div className="hidden md:flex space-x-8">
-                    <button onClick={() => setCurrentPage('home')} className="text-sm tracking-wide hover:text-gray-600 transition-colors">HOME</button>
-                    <button onClick={() => setCurrentPage('work')} className="text-sm tracking-wide hover:text-gray-600 transition-colors">WORK</button>
-                    <button onClick={() => setCurrentPage('about')} className="text-sm tracking-wide hover:text-gray-600 transition-colors">ABOUT</button>
-                    <button onClick={() => setCurrentPage('contact')} className="text-sm tracking-wide hover:text-gray-600 transition-colors">CONTACT</button>
-                  </div>
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Brady</h2>
+        <p>I'm a passionate photographer chasing light across continents. From bustling markets to serene mountain trails, my work blends travel's thrill with the depth of human stories. Join me on this visual journey.</p>
+        <a href="mailto:brady@example.com" class="cta">Get in Touch</a>
+    </section>
 
-                  {/* Mobile Menu Button */}
-                  <button 
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="md:hidden"
-                  >
-                    {mobileMenuOpen ? React.createElement(X) : React.createElement(Menu)}
-                  </button>
-                </div>
-              </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <p>&copy; 2025 Brady. All rights reserved. | <a href="#header" style="color: #ccc;">Back to Top</a></p>
+    </footer>
 
-              {/* Mobile Menu */}
-              {mobileMenuOpen && (
-                <div className="md:hidden bg-white border-t border-gray-200">
-                  <div className="px-4 py-4 space-y-3">
-                    <button onClick={() => { setCurrentPage('home'); setMobileMenuOpen(false); }} className="block w-full text-left text-sm tracking-wide hover:text-gray-600">HOME</button>
-                    <button onClick={() => { setCurrentPage('work'); setMobileMenuOpen(false); }} className="block w-full text-left text-sm tracking-wide hover:text-gray-600">WORK</button>
-                    <button onClick={() => { setCurrentPage('about'); setMobileMenuOpen(false); }} className="block w-full text-left text-sm tracking-wide hover:text-gray-600">ABOUT</button>
-                    <button onClick={() => { setCurrentPage('contact'); setMobileMenuOpen(false); }} className="block w-full text-left text-sm tracking-wide hover:text-gray-600">CONTACT</button>
-                  </div>
-                </div>
-              )}
-            </nav>
-          );
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Photo">
+    </div>
 
-          const HomePage = () => (
-            <div className="min-h-screen">
-              {/* Hero Section */}
-              <div className="relative h-screen">
-                <img 
-                  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600" 
-                  alt="Hero" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <h1 className="text-5xl md:text-7xl font-light tracking-wider mb-4">BRADY</h1>
-                    <p className="text-xl md:text-2xl font-light tracking-widest">Adventure • Landscape • Travel</p>
-                  </div>
-                </div>
-              </div>
+    <script>
+        // Simple Lightbox
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
 
-              {/* Featured Categories */}
-              <div className="max-w-7xl mx-auto px-4 py-20">
-                <div className="grid md:grid-cols-3 gap-8">
-                  {['adventure', 'landscape', 'travel'].map((category) => (
-                    <div 
-                      key={category}
-                      onClick={() => { setCurrentPage('work'); setSelectedCategory(category); }}
-                      className="group cursor-pointer"
-                    >
-                      <div className="relative h-96 overflow-hidden mb-4">
-                        <img 
-                          src={photography[category][0].url}
-                          alt={category}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                      </div>
-                      <h3 className="text-2xl font-light tracking-wider uppercase text-center group-hover:text-gray-600 transition-colors">
-                        {category}
-                      </h3>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          );
+        // Smooth Scroll for CTAs (if linking to sections)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
-          const WorkPage = () => {
-            const displayCategory = selectedCategory || 'adventure';
-            
-            return (
-              <div className="pt-24 pb-20 min-h-screen">
-                <div className="max-w-7xl mx-auto px-4">
-                  <h1 className="text-4xl font-light tracking-wider mb-12 text-center">PORTFOLIO</h1>
-                  
-                  {/* Category Filters */}
-                  <div className="flex justify-center space-x-8 mb-12">
-                    {['adventure', 'landscape', 'travel'].map((category) => (
-                      <button
-                        key={category}
-                        onClick={() => setSelectedCategory(category)}
-                        className={`text-sm tracking-wider uppercase transition-colors ${
-                          displayCategory === category ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-600'
-                        }`}
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Photo Grid */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {photography[displayCategory].map((photo) => (
-                      <div key={photo.id} className="group relative overflow-hidden aspect-square">
-                        <img 
-                          src={photo.url}
-                          alt={photo.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                          <p className="text-white text-lg tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            {photo.title}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          };
-
-          const AboutPage = () => (
-            <div className="pt-24 pb-20 min-h-screen">
-              <div className="max-w-4xl mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-                  <div>
-                    <img 
-                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
-                      alt="About"
-                      className="w-full h-96 object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h1 className="text-4xl font-light tracking-wider mb-6">ABOUT ME</h1>
-                    <div className="space-y-4 text-gray-700 leading-relaxed">
-                      <p>
-                        I'm a photographer specializing in adventure, landscape, and travel photography. 
-                        My work captures the raw beauty of the natural world and the spirit of exploration.
-                      </p>
-                      <p>
-                        Based in the mountains, I spend my time chasing light, scaling peaks, and 
-                        documenting the incredible landscapes that inspire me. Each photograph tells 
-                        a story of adventure and the connection between humanity and nature.
-                      </p>
-                      <p>
-                        My work has been featured in various publications and I collaborate with 
-                        outdoor brands to create authentic visual narratives.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-8 text-center py-12 border-t border-gray-200">
-                  <div>
-                    <p className="text-4xl font-light mb-2">500+</p>
-                    <p className="text-sm tracking-wider text-gray-600">PEAKS CLIMBED</p>
-                  </div>
-                  <div>
-                    <p className="text-4xl font-light mb-2">50+</p>
-                    <p className="text-sm tracking-wider text-gray-600">COUNTRIES VISITED</p>
-                  </div>
-                  <div>
-                    <p className="text-4xl font-light mb-2">10K+</p>
-                    <p className="text-sm tracking-wider text-gray-600">PHOTOS TAKEN</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-
-          const ContactPage = () => (
-            <div className="pt-24 pb-20 min-h-screen">
-              <div className="max-w-2xl mx-auto px-4">
-                <h1 className="text-4xl font-light tracking-wider mb-12 text-center">GET IN TOUCH</h1>
-                
-                <div className="mb-12 text-center">
-                  <p className="text-gray-700 mb-8">
-                    Available for commissions, collaborations, and print sales.
-                  </p>
-                  <div className="flex justify-center space-x-6">
-                    <a href="mailto:your@email.com" className="hover:text-gray-600 transition-colors">
-                      {React.createElement(Mail, { size: 24 })}
-                    </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors">
-                      {React.createElement(Instagram, { size: 24 })}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm tracking-wider mb-2">NAME</label>
-                    <input 
-                      type="text"
-                      className="w-full px-4 py-3 border border-gray-300 focus:border-gray-600 focus:outline-none transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm tracking-wider mb-2">EMAIL</label>
-                    <input 
-                      type="email"
-                      className="w-full px-4 py-3 border border-gray-300 focus:border-gray-600 focus:outline-none transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm tracking-wider mb-2">MESSAGE</label>
-                    <textarea 
-                      rows="6"
-                      className="w-full px-4 py-3 border border-gray-300 focus:border-gray-600 focus:outline-none transition-colors"
-                    ></textarea>
-                  </div>
-                  <button 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert('Thank you for your message! This is a demo - connect your email service.');
-                    }}
-                    className="w-full bg-black text-white py-3 tracking-wider hover:bg-gray-800 transition-colors"
-                  >
-                    SEND MESSAGE
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
-
-          const Footer = () => (
-            <footer className="bg-gray-900 text-white py-12">
-              <div className="max-w-7xl mx-auto px-4 text-center">
-                <p className="text-2xl font-light tracking-wider mb-4">BRADY</p>
-                <p className="text-sm tracking-wider text-gray-400 mb-6">Adventure • Landscape • Travel</p>
-                <div className="flex justify-center space-x-6 mb-6">
-                  <a href="mailto:your@email.com" className="hover:text-gray-400 transition-colors">
-                    {React.createElement(Mail, { size: 20 })}
-                  </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">
-                    {React.createElement(Instagram, { size: 20 })}
-                  </a>
-                </div>
-                <p className="text-xs text-gray-500">© 2024 All rights reserved</p>
-              </div>
-            </footer>
-          );
-
-          return (
-            <div className="font-sans text-gray-900">
-              <Navigation />
-              {currentPage === 'home' && <HomePage />}
-              {currentPage === 'work' && <WorkPage />}
-              {currentPage === 'about' && <AboutPage />}
-              {currentPage === 'contact' && <ContactPage />}
-              <Footer />
-            </div>
-          );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(React.createElement(PhotographyPortfolio));
+        // Scroll Prompt Animation (fades out after first scroll)
+        let scrolled = false;
+        window.addEventListener('scroll', () => {
+            if (!scrolled) {
+                document.querySelector('.scroll-prompt').style.opacity = '0';
+                scrolled = true;
+            }
+        });
     </script>
 </body>
 </html>
