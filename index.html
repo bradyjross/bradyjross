@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dopjo7zej/image/upload/v1764965985/simpleiutah_paxnwg.png">
 
     <link rel="shortcut icon" href="/images/favicon.ico">
-    
+    <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
@@ -34,41 +34,60 @@
         }
         
         /* --- NAVIGATION BAR --- */
-        #navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: var(--color-charcoal); /* APPLIED: Deep Charcoal */
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            height: 60px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        .nav-logo a img {
-            height: 60px; 
-            /* You might need to change the logo to a light version if it was dark */
-        }
-        .nav-links a {
-            color: var(--color-parchment); /* APPLIED: Off-White/Parchment for contrast */
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 500; 
-            font-family: 'nitti-grotesk-condensed', sans-serif;
-            transition: color 0.3s;
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--color-charcoal);
+    padding: 20px 30px;
+    
+    /* === MODIFICATION 1: Center everything in the navbar container === */
+    display: flex;
+    flex-direction: column; /* Stack the logo and links vertically */
+    justify-content: center;
+    align-items: center;
+    /* =============================================================== */
+    
+    z-index: 1000;
+    height: auto; /* Changed from 60px to auto to accommodate stacking */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
-            /* --- UNDERLINE SWIPE SETUP --- */
-            position: relative; 
-            padding-bottom: 5px; 
-            /* --- END SETUP --- */
-        }
-        .nav-links a:hover {
-            color: var(--color-ochre); /* APPLIED: Burnt Ochre */
-        }
+.nav-logo {
+    /* Set the logo container to take full width and center its content */
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5px; /* Add a little space between logo and links */
+}
 
+.nav-logo a img {
+    height: 90px; /* Reduced height from 60px to 40px for better vertical fit */
+    filter: ; /* You might need to change the logo to a light version if it was dark */
+}
+
+.nav-links {
+    /* === MODIFICATION 2: Center the links horizontally === */
+    text-align: center;
+    padding-top: 5px; /* Add space above the links */
+}
+
+.nav-links a {
+    color: var(--color-parchment);
+    text-decoration: none;
+    /* Reduced margin to make stacked links look better */
+    margin: 0 12px; 
+    font-weight: 500;
+    font-family: 'nitti-grotesk-condensed', sans-serif;
+    transition: color 0.3s;
+
+    /* --- UNDERLINE SWIPE SETUP --- */
+    position: relative;
+    padding-bottom: 5px;
+    /* --- END SETUP --- */
+}
+
+/* ... rest of the CSS for .nav-links a::after remains the same ... */
         /* 1. Create the invisible underline */
         #navbar .nav-links a::after {
             content: '';
@@ -104,13 +123,13 @@
         h1, h2 { 
             font-family: 'nitti-grotesk-condensed', sans-serif;
             font-size: 3em; 
-            font-weight: 700;
+            font-weight: 400;
             margin-bottom: 20px; 
         }
         h3 { 
             font-family: 'nitti-grotesk-condensed', sans-serif;
             font-size: 1.5em; 
-            font-weight: 500; 
+            font-weight: 200; 
             margin-bottom: 10px; 
         }
         p { 
@@ -333,6 +352,49 @@
                 transform: translateY(-5px) translateX(-50%);
             }
         }
+        /* --- ABOUT SECTION STYLES (NEW) --- */
+.about-content {
+    display: flex; /* Enable Flexbox layout */
+    align-items: center; /* Vertically align items */
+    max-width: 900px; /* Control max width of the container */
+    width: 100%;
+    margin: 30px auto;
+    text-align: left; /* Make text readable within its column */
+    gap: 40px; /* Space between the image and the text */
+}
+
+.about-image {
+    flex: 1; /* Allow the image container to grow */
+    min-width: 300px; /* Minimum size for the image area */
+    border-radius: 10px;
+    overflow: hidden; /* Hide anything outside the rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.about-text {
+    flex: 2; /* Allow the text container to be larger than the image */
+    padding: 20px 0;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column; /* Stack image above text on mobile */
+        gap: 20px;
+        text-align: center; /* Center align text on mobile */
+    }
+    .about-text {
+        padding: 0;
+    }
+}
+/* --- END ABOUT SECTION STYLES --- */
     </style>
 </head>
 <body>
@@ -351,7 +413,7 @@
     </header>
     
     <section id="header">
-        <h1>Brady</h1>
+        <h1>Brady Ross Studio</h1>
         <p>World Explorer Through the Lens</p>
         <p class="scroll-prompt">Scroll to Discover</p>
     </section>
@@ -393,10 +455,20 @@
     </section>
 
     <section id="about">
-        <h2>About Brady</h2>
-        <p>I'm a passionate photographer chasing light across continents. From bustling markets to serene mountain trails, my work blends travel's thrill with the depth of human stories. Join me on this visual journey.</p>
-        <a href="#contact" class="cta">Get in Touch</a>
-    </section>
+    <h2>About Brady</h2>
+    
+    <div class="about-content">
+        <div class="about-image">
+            <img src="https://res.cloudinary.com/dopjo7zej/image/upload/v1764966706/DSC09776_ziznby.jpg" alt="Brady Portrait">
+        </div>
+        <div class="about-text">
+            <p>I'm a passionate photographer chasing light across continents. From bustling markets to serene mountain trails, my work blends travel's thrill with the depth of human stories. Join me on this visual journey.</p>
+            <p>My philosophy is simple: find the extraordinary in the ordinary. Whether I'm documenting ancient traditions or capturing a fleeting moment on a busy street, my goal is to create compelling visual narratives that resonate long after the shutter closes.</p>
+            <a href="#contact" class="cta">Get in Touch</a>
+        </div>
+    </div>
+    
+</section>
 
     <section id="contact">
         <h2>Work With Me</h2>
